@@ -20,17 +20,21 @@ public class Principal {
 
     private final String API_KEY = "&apikey=6585022c";
 
+    private List<DadosSerie> dadosSeries = new ArrayList<>();
+
 
     public void exibeMenu() {
+        var opcao = -1;
         var menu = """
                 1 - Buscar séries
                 2 - Buscar episódios
+                3 - Listar series buscadas
                 
                 0 - Sair
                 """;
 
         System.out.println(menu);
-        var opcao = leitura.nextInt();
+         opcao = leitura.nextInt();
         leitura.nextLine();
 
         switch (opcao) {
@@ -39,6 +43,9 @@ public class Principal {
                 break;
             case 2:
                 buscarEpisodioPorSerie();
+                break;
+            case 3:
+                listarSeriesBuscadas();
                 break;
             case 0:
                 System.out.println("Saindo...");
@@ -50,6 +57,7 @@ public class Principal {
 
     private void buscarSerieWeb() {
         DadosSerie dados = getDadosSerie();
+        dadosSeries.add(dados);
         System.out.println(dados);
     }
 
@@ -71,5 +79,9 @@ public class Principal {
             temporadas.add(dadosTemporada);
         }
         temporadas.forEach(System.out::println);
+
+    }
+    private void listarSeriesBuscadas(){
+        dadosSeries.forEach(System.out::println);
     }
 }
